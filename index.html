@@ -1,649 +1,319 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Explore the five official classes of tequila and follow blue agave from field to bottle.">
-  <meta name="robots" content="noindex, nofollow, noarchive">
-  <link rel="canonical" href="https://ktg1.github.io/typesoftequila.com/">
-  <title>Types of Tequila — From Agave to Glass</title>
-  <style>
-    :root {
-      --chalk: #f2f0e8;
-      --paper: #e7e2d4;
-      --ink: #102d34;
-      --agave: #27606a;
-      --copper: #b85f35;
-      --straw: #d6b35a;
-      --barrel: #80502f;
-      --active: #8fc3c5;
-      --liquid: #dbe9e6;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      color: var(--ink);
-      background: var(--chalk);
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      line-height: 1.55;
-    }
-
-    button, a { font: inherit; }
-    a { color: inherit; }
-    button:focus-visible, a:focus-visible { outline: 3px solid var(--copper); outline-offset: 4px; }
-
-    .masthead {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: min(1220px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 22px 0;
-      border-bottom: 1px solid rgba(16, 45, 52, .26);
-    }
-
-    .brand {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.12rem;
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    .masthead span { font-size: .78rem; letter-spacing: .05em; }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.3fr .7fr;
-      gap: 50px;
-      align-items: end;
-      width: min(1220px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: clamp(64px, 9vw, 126px) 0 72px;
-    }
-
-    h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
-    h1 {
-      max-width: 850px;
-      margin: 0;
-      font-size: clamp(3.6rem, 8vw, 8.2rem);
-      letter-spacing: -.06em;
-      line-height: .87;
-    }
-
-    .hero p { max-width: 430px; margin: 0; font-size: clamp(1rem, 1.35vw, 1.18rem); }
-    .explorer { color: var(--chalk); background: var(--ink); padding: 0 20px clamp(76px, 9vw, 120px); }
-    .explorer-inner { width: min(1220px, 100%); margin: 0 auto; }
-
-    .tablist-wrap {
-      position: sticky;
-      top: 0;
-      z-index: 5;
-      margin: 0 -20px;
-      padding: 0 20px;
-      background: rgba(16, 45, 52, .96);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(242, 240, 232, .22);
-    }
-
-    [role="tablist"] {
-      display: flex;
-      width: min(1220px, 100%);
-      margin: 0 auto;
-      overflow-x: auto;
-      scrollbar-width: thin;
-    }
-
-    [role="tab"] {
-      flex: 1 0 auto;
-      min-width: 150px;
-      padding: 25px 22px 21px;
-      color: #c9d4d2;
-      background: transparent;
-      border: 0;
-      border-bottom: 4px solid transparent;
-      cursor: pointer;
-      text-align: left;
-      transition: color .2s ease, border-color .2s ease, background .2s ease;
-    }
-
-    [role="tab"] small { display: block; margin-top: 2px; font-size: .72rem; opacity: .72; }
-    [role="tab"][aria-selected="true"] { color: #fff; border-bottom-color: var(--active); background: rgba(255,255,255,.055); }
-    [role="tab"]:hover { color: #fff; }
-    [role="tabpanel"] { padding-top: clamp(58px, 7vw, 96px); }
-    [role="tabpanel"][hidden] { display: none; }
-
-    .portrait {
-      display: grid;
-      grid-template-columns: minmax(280px, .58fr) minmax(450px, 1.42fr);
-      gap: clamp(40px, 6vw, 84px);
-      align-items: center;
-    }
-
-    .visual {
-      position: relative;
-      display: grid;
-      place-items: end center;
-      min-height: 450px;
-      padding: 48px 25px 30px;
-      overflow: hidden;
-      background: #0a242b;
-      border: 1px solid rgba(242, 240, 232, .24);
-    }
-
-    .visual::before {
-      content: "";
-      position: absolute;
-      width: 350px;
-      height: 350px;
-      top: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      border: 1px solid color-mix(in srgb, var(--active) 70%, transparent);
-      border-radius: 50%;
-      background: repeating-conic-gradient(from 6deg, transparent 0 13deg, rgba(242,240,232,.09) 13deg 15deg);
-    }
-
-    .bottle {
-      position: relative;
-      z-index: 1;
-      width: 140px;
-      height: 292px;
-      overflow: hidden;
-      border: 3px solid rgba(242, 240, 232, .9);
-      border-radius: 52px 52px 28px 28px;
-      box-shadow: inset 13px 0 rgba(255,255,255,.08), 0 28px 42px rgba(0,0,0,.28);
-    }
-
-    .bottle::before {
-      content: "";
-      position: absolute;
-      z-index: 2;
-      inset: 53% 14px auto;
-      height: 62px;
-      background: var(--chalk);
-      border: 3px double var(--ink);
-    }
-
-    .bottle::after {
-      content: attr(data-mark);
-      position: absolute;
-      z-index: 3;
-      top: calc(53% + 17px);
-      left: 0;
-      right: 0;
-      color: var(--ink);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: .9rem;
-      text-align: center;
-    }
-
-    .neck {
-      position: absolute;
-      z-index: 2;
-      top: 10px;
-      left: 50%;
-      width: 58px;
-      height: 64px;
-      transform: translate(-50%, -50%);
-      background: #0a242b;
-      border: 3px solid rgba(242, 240, 232, .9);
-      border-bottom: 0;
-      border-radius: 10px 10px 0 0;
-    }
-
-    .liquid { position: absolute; inset: 30% 0 0; background: var(--liquid); opacity: .82; }
-    .age-stamp {
-      position: absolute;
-      z-index: 2;
-      top: 30px;
-      left: 32px;
-      max-width: 170px;
-      color: var(--active);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2.5rem, 5vw, 4.7rem);
-      line-height: .88;
-    }
-
-    .panel-copy h2 { margin: 0; font-size: clamp(3.2rem, 6vw, 6.4rem); letter-spacing: -.055em; line-height: .9; }
-    .panel-copy .definition { max-width: 680px; margin: 24px 0 38px; color: #d2dcda; font-size: clamp(1.05rem, 1.5vw, 1.28rem); }
-
-    .properties {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      margin: 0;
-      border-top: 1px solid rgba(242, 240, 232, .3);
-    }
-
-    .property { padding: 19px 18px 22px 0; border-bottom: 1px solid rgba(242, 240, 232, .3); }
-    .property:nth-child(odd) { border-right: 1px solid rgba(242, 240, 232, .3); }
-    .property:nth-child(even) { padding-left: 22px; }
-    .property dt { color: var(--active); font-size: .76rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-    .property dd { margin: 7px 0 0; color: #edf2f0; }
-
-    .detail-report {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1px;
-      margin-top: 74px;
-      color: var(--ink);
-      background: rgba(242, 240, 232, .25);
-      border: 1px solid rgba(242, 240, 232, .25);
-    }
-
-    .report-block { padding: clamp(28px, 4vw, 48px); background: var(--chalk); }
-    .report-block h3 { margin: 0 0 24px; font-size: clamp(1.8rem, 3vw, 2.8rem); letter-spacing: -.035em; }
-    .report-kicker { display: block; margin-bottom: 7px; color: var(--copper); font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-    .report-note { margin: -14px 0 26px; color: #53676c; font-size: .82rem; }
-
-    .stat-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; }
-    .stat { padding: 16px 12px 17px 0; border-top: 1px solid rgba(16, 45, 52, .24); }
-    .stat:nth-child(even) { padding-left: 20px; border-left: 1px solid rgba(16, 45, 52, .24); }
-    .stat dt { color: #587077; font-size: .7rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
-    .stat dd { margin: 5px 0 0; font-family: Georgia, "Times New Roman", serif; font-size: 1.18rem; line-height: 1.25; }
-
-    .taste-bars { display: grid; gap: 13px; }
-    .taste-row { display: grid; grid-template-columns: 78px 1fr 30px; gap: 12px; align-items: center; font-size: .82rem; }
-    .taste-track { height: 7px; overflow: hidden; background: #d4d3ca; }
-    .taste-fill { display: block; width: 0; height: 100%; background: var(--active); transition: width .34s ease; }
-    .taste-value { color: #587077; text-align: right; }
-
-    .cocktail-report { grid-column: 1 / -1; }
-    .cocktail-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin: 0; padding: 0; list-style: none; background: rgba(16,45,52,.24); border: 1px solid rgba(16,45,52,.24); }
-    .cocktail-list li { min-height: 170px; padding: 24px; background: var(--chalk); }
-    .cocktail-list strong { display: block; margin-bottom: 12px; font-family: Georgia, "Times New Roman", serif; font-size: 1.4rem; }
-    .cocktail-list p { margin: 0; color: #40585e; font-size: .9rem; }
-
-    .difference-report { grid-column: 1 / -1; display: grid; grid-template-columns: .65fr 1.35fr; gap: 40px; color: var(--chalk); background: #0a242b; }
-    .difference-report h3 { color: var(--active); }
-    .difference-report p { max-width: 780px; margin: 0; color: #d7dfdd; font-size: 1.08rem; }
-
-    .label-guide, .industry-report { padding: clamp(76px, 10vw, 136px) max(20px, calc((100vw - 1220px) / 2)); }
-    .label-guide { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(48px, 8vw, 110px); color: var(--chalk); background: var(--agave); }
-    .label-guide h2, .industry-report h2 { margin: 0; font-size: clamp(2.8rem, 5.5vw, 5.7rem); letter-spacing: -.05em; line-height: .94; }
-    .label-options { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(242,240,232,.35); }
-    .label-option { padding: 28px 25px 28px 0; border-bottom: 1px solid rgba(242,240,232,.35); }
-    .label-option + .label-option { padding-left: 25px; border-left: 1px solid rgba(242,240,232,.35); }
-    .label-option h3 { margin: 0 0 10px; color: #f3d08b; font-size: 1.6rem; }
-    .label-option p { margin: 0; color: #e0e8e5; }
-
-    .industry-report { background: var(--paper); }
-    .industry-head { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: end; margin-bottom: 55px; }
-    .industry-head p { max-width: 550px; margin: 0; }
-    .industry-stats { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(16,45,52,.3); border-left: 1px solid rgba(16,45,52,.3); }
-    .industry-stat { min-height: 180px; padding: 28px; border-right: 1px solid rgba(16,45,52,.3); border-bottom: 1px solid rgba(16,45,52,.3); }
-    .industry-stat strong { display: block; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.2rem, 4vw, 4.4rem); font-weight: 400; line-height: .95; }
-    .industry-stat span { display: block; margin-top: 12px; color: #53676c; }
-    .industry-source { display: inline-block; margin-top: 26px; font-size: .82rem; }
-
-    .process-section { width: min(1220px, calc(100% - 40px)); margin: 0 auto; padding: clamp(78px, 10vw, 140px) 0; }
-    .process-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: end; margin-bottom: 50px; }
-    .process-intro h2 { max-width: 720px; margin: 0; font-size: clamp(2.7rem, 5.5vw, 5.6rem); letter-spacing: -.05em; line-height: .94; }
-    .process-intro p { max-width: 520px; margin: 0; }
-
-    .process {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      counter-reset: step;
-      border-top: 1px solid rgba(16, 45, 52, .32);
-      border-left: 1px solid rgba(16, 45, 52, .32);
-    }
-
-    .process li {
-      position: relative;
-      min-width: 0;
-      counter-increment: step;
-      border-right: 1px solid rgba(16, 45, 52, .32);
-      border-bottom: 1px solid rgba(16, 45, 52, .32);
-      background: var(--chalk);
-    }
-
-    .process li::before {
-      content: counter(step, decimal-leading-zero);
-      position: absolute;
-      z-index: 2;
-      top: 14px;
-      left: 14px;
-      display: grid;
-      place-items: center;
-      width: 48px;
-      height: 48px;
-      color: var(--chalk);
-      background: var(--ink);
-      border: 1px solid rgba(242,240,232,.55);
-      border-radius: 50%;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.25rem;
-    }
-
-    .process-visual { aspect-ratio: 1; overflow: hidden; background: var(--ink); }
-    .process-visual img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease, filter .45s ease; }
-    .process li:hover .process-visual img { transform: scale(1.035); filter: saturate(1.08); }
-    .process-copy { min-height: 205px; padding: 24px; }
-    .process h3 { margin: 0 0 8px; font-size: 1.42rem; }
-    .process p { margin: 0; font-size: .9rem; }
-    .process .maturation .process-copy { color: var(--chalk); background: var(--barrel); }
-    .process .maturation::before { color: var(--ink); background: #f0cf83; border-color: #f0cf83; }
-
-    .age-scale {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      width: min(780px, 100%);
-      margin: 58px auto 0;
-      text-align: center;
-    }
-
-    .age-scale span { position: relative; padding-top: 22px; font-size: .78rem; }
-    .age-scale span::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: rgba(16,45,52,.32); }
-    .age-scale span::after { content: ""; position: absolute; top: -5px; left: 50%; width: 12px; height: 12px; transform: translateX(-50%); border-radius: 50%; background: var(--paper); border: 2px solid var(--ink); }
-    .age-scale span.current { color: var(--copper); font-weight: 700; }
-    .age-scale span.current::after { background: var(--copper); border-color: var(--copper); box-shadow: 0 0 0 6px rgba(184,95,53,.15); }
-
-    footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 34px;
-      padding: 38px max(20px, calc((100vw - 1220px) / 2));
-      color: var(--chalk);
-      background: var(--ink);
-      font-size: .82rem;
-    }
-
-    footer p { max-width: 690px; margin: 0; }
-
-    @media (max-width: 880px) {
-      .hero, .portrait, .process-intro, .label-guide, .industry-head { grid-template-columns: 1fr; }
-      .hero p { max-width: 620px; }
-      .visual { min-height: 440px; }
-      .process, .industry-stats { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 560px) {
-      .masthead span { display: none; }
-      .hero { padding-top: 58px; }
-      [role="tab"] { min-width: 126px; padding-inline: 16px; }
-      .portrait { grid-template-columns: minmax(0, 1fr); }
-      .visual { min-height: 420px; }
-      .visual::before { width: 320px; height: 320px; }
-      .properties, .process, .detail-report, .stat-list, .cocktail-list, .label-options, .industry-stats { grid-template-columns: 1fr; }
-      .property:nth-child(odd) { border-right: 0; }
-      .property:nth-child(even) { padding-left: 0; }
-      .stat:nth-child(even) { padding-left: 0; border-left: 0; }
-      .cocktail-report, .difference-report { grid-column: auto; }
-      .difference-report { grid-template-columns: 1fr; gap: 8px; }
-      .label-option + .label-option { padding-left: 0; border-left: 0; }
-      .process li { min-height: 190px; }
-      footer { flex-direction: column; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      [role="tab"] { transition: none; }
-      .process-visual img { transition: none; }
-    }
-  </style>
+  <meta name="description" content="An interactive tequila sommelier guide comparing aging, vessels, sensory profiles, pairings, cocktails, and bottle selections.">
+  <meta name="theme-color" content="#F7FAF8">
+  <title>Tequila Sommelier — Interactive Guide</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <header class="masthead">
-    <a class="brand" href="#top">Types of Tequila</a>
-    <span>From Agave tequilana Weber blue variety</span>
+<body data-theme="blanco">
+  <a href="#guide" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-white focus:px-4 focus:py-3 focus:text-black">Skip to the guide</a>
+
+  <header class="tasting-rail">
+    <div class="page-shell rail-top">
+      <a class="wordmark no-underline" href="#guide">Tequila <span>Sommelier</span></a>
+      <div class="quality-control">
+        <div class="quality-copy">
+          <strong id="quality-label">100% Blue Agave</strong>
+          <span>Quality lens</span>
+        </div>
+        <button class="switch" id="quality-switch" type="button" role="switch" aria-checked="true" aria-labelledby="quality-label"></button>
+        <div class="quality-tip" id="quality-tip" role="tooltip" hidden>
+          Mixto tequila uses at least 51% blue-agave sugars and may use up to 49% other permitted reducing sugars. Caramel coloring may be permitted depending on the class and label.
+        </div>
+      </div>
+    </div>
+    <nav class="page-shell tab-scroller" aria-label="Tequila styles">
+      <div class="tablist" role="tablist" aria-label="Choose a tequila style">
+        <button class="tab active" id="tab-blanco" type="button" role="tab" aria-selected="true" aria-controls="guide" data-key="blanco" tabindex="0"><strong>Blanco</strong><span>Unaged clarity</span></button>
+        <button class="tab" id="tab-reposado" type="button" role="tab" aria-selected="false" aria-controls="guide" data-key="reposado" tabindex="-1"><strong>Reposado</strong><span>Honeyed rest</span></button>
+        <button class="tab" id="tab-anejo" type="button" role="tab" aria-selected="false" aria-controls="guide" data-key="anejo" tabindex="-1"><strong>Añejo</strong><span>Barrel depth</span></button>
+        <button class="tab" id="tab-extra" type="button" role="tab" aria-selected="false" aria-controls="guide" data-key="extra" tabindex="-1"><strong>Extra Añejo</strong><span>Long maturation</span></button>
+        <button class="tab" id="tab-cristalino" type="button" role="tab" aria-selected="false" aria-controls="guide" data-key="cristalino" tabindex="-1"><strong>Cristalino</strong><span>Filtered contrast</span></button>
+      </div>
+    </nav>
   </header>
 
-  <main id="top">
-    <section class="hero" aria-labelledby="hero-title">
-      <h1 id="hero-title">Five ways tequila becomes itself.</h1>
-      <p>Every class starts with blue agave, cooking, fermentation, and distillation. Time, wood, and blending define what happens after the still.</p>
-    </section>
+  <main id="guide" role="tabpanel" aria-labelledby="tab-blanco" tabindex="0">
+    <p id="announce" class="sr-only" aria-live="polite"></p>
 
-    <section class="explorer" aria-label="Explore tequila classes">
-      <div class="tablist-wrap">
-        <div role="tablist" aria-label="Tequila classes">
-          <button id="tab-blanco" role="tab" aria-selected="true" aria-controls="panel-blanco" tabindex="0">Blanco<small>Unaged clarity</small></button>
-          <button id="tab-joven" role="tab" aria-selected="false" aria-controls="panel-joven" tabindex="-1">Joven<small>A considered blend</small></button>
-          <button id="tab-reposado" role="tab" aria-selected="false" aria-controls="panel-reposado" tabindex="-1">Reposado<small>2+ months</small></button>
-          <button id="tab-anejo" role="tab" aria-selected="false" aria-controls="panel-anejo" tabindex="-1">Añejo<small>1+ year</small></button>
-          <button id="tab-extra" role="tab" aria-selected="false" aria-controls="panel-extra" tabindex="-1">Extra añejo<small>3+ years</small></button>
-        </div>
-      </div>
-
-      <div class="explorer-inner">
-        <section id="panel-blanco" role="tabpanel" aria-labelledby="tab-blanco" data-accent="#8fc3c5" data-liquid="#dbe9e6" data-age="0" data-maturation="No wood maturation is required. After distillation, blanco is adjusted to bottling strength with water." tabindex="0">
-          <div class="portrait">
-            <div class="visual" aria-label="Clear blanco tequila bottle with a zero-time age mark"><span class="age-stamp">From<br>the still</span><div class="neck" aria-hidden="true"></div><div class="bottle" data-mark="BLANCO" aria-hidden="true"><div class="liquid"></div></div></div>
-            <div class="panel-copy"><h2>Blanco</h2><p class="definition">The direct expression: tequila from the still, adjusted to its bottling strength with water. It makes the cooked agave and distillation choices easiest to read.</p><dl class="properties"><div class="property"><dt>Maturation</dt><dd>No wood aging required</dd></div><div class="property"><dt>Official alternative</dt><dd>Plata or Silver</dd></div><div class="property"><dt>Appearance</dt><dd>Clear</dd></div><div class="property"><dt>Common profile</dt><dd>Cooked agave, citrus, herbs, pepper</dd></div></dl></div>
+    <section class="zone" aria-labelledby="class-title">
+      <div class="page-shell hero-grid">
+        <div class="liquid-lab" role="group" aria-label="Interactive liquid color specimen">
+          <div class="bottle-stage" aria-hidden="true">
+            <svg viewBox="0 0 300 650" role="img">
+              <defs>
+                <linearGradient id="glassGradient" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#fff" stop-opacity=".58"/>
+                  <stop offset=".42" stop-color="#fff" stop-opacity=".09"/>
+                  <stop offset="1" stop-color="#fff" stop-opacity=".34"/>
+                </linearGradient>
+                <clipPath id="bottleClip"><path d="M111 26h78v79c0 22 9 33 30 48 18 13 27 34 27 59v350c0 40-22 62-62 62h-68c-40 0-62-22-62-62V212c0-25 9-46 27-59 21-15 30-26 30-48z"/></clipPath>
+              </defs>
+              <rect class="bottle-liquid" x="52" y="166" width="196" height="410" clip-path="url(#bottleClip)"/>
+              <path class="bottle-glass" d="M111 26h78v79c0 22 9 33 30 48 18 13 27 34 27 59v350c0 40-22 62-62 62h-68c-40 0-62-22-62-62V212c0-25 9-46 27-59 21-15 30-26 30-48z"/>
+              <path d="M111 82h78" fill="none" stroke="currentColor" stroke-opacity=".35"/>
+              <rect class="bottle-label" x="76" y="330" width="148" height="154" rx="2"/>
+              <text class="bottle-year" x="150" y="364">INTERACTIVE GUIDE</text>
+              <text class="bottle-type" id="bottle-type" x="150" y="416">BLANCO</text>
+              <text class="bottle-year" id="bottle-proof" x="150" y="451">40% ALC. / VOL.</text>
+            </svg>
           </div>
-        </section>
-
-        <section id="panel-joven" role="tabpanel" aria-labelledby="tab-joven" data-accent="#ddba65" data-liquid="#d5b264" data-age="0" data-maturation="Joven is defined by blending rather than a minimum aging period: blanco is combined with reposado, añejo, or extra añejo tequila." tabindex="0" hidden>
-          <div class="portrait">
-            <div class="visual" aria-label="Pale gold joven tequila bottle with a blend mark"><span class="age-stamp">Blend<br>after still</span><div class="neck" aria-hidden="true"></div><div class="bottle" data-mark="JOVEN" aria-hidden="true"><div class="liquid"></div></div></div>
-            <div class="panel-copy"><h2>Joven</h2><p class="definition">A bridge between fresh and matured tequila. Officially, it is blanco blended with reposado, añejo, or extra añejo tequila.</p><dl class="properties"><div class="property"><dt>Composition</dt><dd>Blanco plus one or more matured classes</dd></div><div class="property"><dt>Official alternative</dt><dd>Oro or Gold</dd></div><div class="property"><dt>Appearance</dt><dd>Often pale gold to amber</dd></div><div class="property"><dt>Common profile</dt><dd>Fresh agave with softer oak notes</dd></div></dl></div>
-          </div>
-        </section>
-
-        <section id="panel-reposado" role="tabpanel" aria-labelledby="tab-reposado" data-accent="#d8a348" data-liquid="#c8943c" data-age="1" data-maturation="Reposado matures in direct contact with oak or holm oak containers for at least two months." tabindex="0" hidden>
-          <div class="portrait">
-            <div class="visual" aria-label="Golden reposado tequila bottle with a two-month age mark"><span class="age-stamp">2+<br>months</span><div class="neck" aria-hidden="true"></div><div class="bottle" data-mark="REPOSADO" aria-hidden="true"><div class="liquid"></div></div></div>
-            <div class="panel-copy"><h2>Reposado</h2><p class="definition">“Rested” tequila. A short stay in wood begins to round the spirit and add color while keeping the agave character in view.</p><dl class="properties"><div class="property"><dt>Minimum maturation</dt><dd>Two months</dd></div><div class="property"><dt>Wood contact</dt><dd>Oak or holm oak containers</dd></div><div class="property"><dt>Appearance</dt><dd>Often straw to gold</dd></div><div class="property"><dt>Common profile</dt><dd>Agave, vanilla, light caramel, spice</dd></div></dl></div>
-          </div>
-        </section>
-
-        <section id="panel-anejo" role="tabpanel" aria-labelledby="tab-anejo" data-accent="#cb7b34" data-liquid="#ad642b" data-age="2" data-maturation="Añejo matures for at least one year in oak or holm oak barrels with a maximum capacity of 600 liters." tabindex="0" hidden>
-          <div class="portrait">
-            <div class="visual" aria-label="Amber añejo tequila bottle with a one-year age mark"><span class="age-stamp">1+<br>year</span><div class="neck" aria-hidden="true"></div><div class="bottle" data-mark="AÑEJO" aria-hidden="true"><div class="liquid"></div></div></div>
-            <div class="panel-copy"><h2>Añejo</h2><p class="definition">A longer conversation with wood. Smaller barrels and a full year or more of maturation deepen color and bring oak-derived aromas forward.</p><dl class="properties"><div class="property"><dt>Minimum maturation</dt><dd>One year</dd></div><div class="property"><dt>Barrel limit</dt><dd>Oak or holm oak, up to 600 liters</dd></div><div class="property"><dt>Appearance</dt><dd>Often deep gold to amber</dd></div><div class="property"><dt>Common profile</dt><dd>Oak, vanilla, dried fruit, baking spice</dd></div></dl></div>
-          </div>
-        </section>
-
-        <section id="panel-extra" role="tabpanel" aria-labelledby="tab-extra" data-accent="#bc6735" data-liquid="#82401e" data-age="3" data-maturation="Extra añejo matures for at least three years in oak or holm oak barrels with a maximum capacity of 600 liters." tabindex="0" hidden>
-          <div class="portrait">
-            <div class="visual" aria-label="Deep amber extra añejo tequila bottle with a three-year age mark"><span class="age-stamp">3+<br>years</span><div class="neck" aria-hidden="true"></div><div class="bottle" data-mark="EXTRA AÑEJO" aria-hidden="true"><div class="liquid"></div></div></div>
-            <div class="panel-copy"><h2>Extra añejo</h2><p class="definition">The longest-matured official class. Three years or more in barrel builds a darker, more wood-led expression while the tequila remains rooted in blue agave.</p><dl class="properties"><div class="property"><dt>Minimum maturation</dt><dd>Three years</dd></div><div class="property"><dt>Barrel limit</dt><dd>Oak or holm oak, up to 600 liters</dd></div><div class="property"><dt>Appearance</dt><dd>Often amber to deep copper</dd></div><div class="property"><dt>Common profile</dt><dd>Toasted oak, cocoa, dried fruit, spice</dd></div></dl></div>
-          </div>
-        </section>
-
-        <div class="detail-report" aria-live="polite">
-          <section class="report-block" aria-labelledby="numbers-title">
-            <span class="report-kicker">Selected class report</span>
-            <h3 id="numbers-title">Numbers &amp; service</h3>
-            <dl class="stat-list">
-              <div class="stat"><dt>Minimum aging</dt><dd id="stat-age">No minimum</dd></div>
-              <div class="stat"><dt>Wood requirement</dt><dd id="stat-wood">None</dd></div>
-              <div class="stat"><dt>Legal alcohol range</dt><dd>35–55% ABV</dd></div>
-              <div class="stat"><dt>Good starting serve</dt><dd id="stat-serve">Small neat pour</dd></div>
-            </dl>
-          </section>
-
-          <section class="report-block" aria-labelledby="taste-title">
-            <span class="report-kicker">Typical profile</span>
-            <h3 id="taste-title">Taste map</h3>
-            <p class="report-note">Relative tendencies, not quality scores. 5 means more prominent.</p>
-            <div class="taste-bars">
-              <div class="taste-row"><span>Agave</span><span class="taste-track"><b class="taste-fill" data-taste="agave"></b></span><span class="taste-value" data-value="agave">5/5</span></div>
-              <div class="taste-row"><span>Oak</span><span class="taste-track"><b class="taste-fill" data-taste="oak"></b></span><span class="taste-value" data-value="oak">0/5</span></div>
-              <div class="taste-row"><span>Fruit</span><span class="taste-track"><b class="taste-fill" data-taste="fruit"></b></span><span class="taste-value" data-value="fruit">3/5</span></div>
-              <div class="taste-row"><span>Spice</span><span class="taste-track"><b class="taste-fill" data-taste="spice"></b></span><span class="taste-value" data-value="spice">4/5</span></div>
-              <div class="taste-row"><span>Body</span><span class="taste-track"><b class="taste-fill" data-taste="body"></b></span><span class="taste-value" data-value="body">2/5</span></div>
+          <div class="swatch-inspector">
+            <div class="swatch-buttons" id="swatches" role="group" aria-label="Inspect liquid colors"></div>
+            <div class="swatch-reading" aria-live="polite">
+              <strong id="swatch-hex">#00A86B</strong>
+              <p id="swatch-science">Agave green anchors the unaged profile; a high-lightness surface preserves the sense of clarity.</p>
             </div>
-          </section>
+          </div>
+        </div>
 
-          <section class="report-block cocktail-report" aria-labelledby="cocktails-title">
-            <span class="report-kicker">Three fitting uses</span>
-            <h3 id="cocktails-title">Cocktails for <span id="cocktail-class">Blanco</span></h3>
-            <p class="report-note">Class pairings are editorial; the IBA recipes linked below define cocktails, not a required tequila class.</p>
-            <ul class="cocktail-list" id="cocktail-list"></ul>
-          </section>
-
-          <section class="report-block difference-report" aria-labelledby="difference-title">
-            <div><span class="report-kicker">Direct comparison</span><h3 id="difference-title">How it differs</h3></div>
-            <p id="difference-copy">Blanco is the only class defined as direct from the still with no required wood maturation or blending with an aged class.</p>
-          </section>
+        <div class="hero-dossier">
+          <div>
+            <div class="class-meta"><span class="class-index" id="class-index">Class 01 / 05</span><span class="class-badge" id="class-badge">Direct from the still</span></div>
+            <h1 class="class-title" id="class-title">Blanco</h1>
+            <p class="class-deck" id="class-deck">The most transparent reading of cooked agave, fermentation, and distillation choices: bright, direct, and structurally lean.</p>
+          </div>
+          <div class="technical-strip">
+            <div class="age-module">
+              <span class="module-label">Aging duration</span>
+              <span class="age-number" id="age-number">60</span><span class="age-unit" id="age-unit">days</span>
+              <p id="age-range">0–60 days</p>
+            </div>
+            <div class="vessel-module">
+              <span class="module-label">Primary vessel</span>
+              <div class="vessel-row"><div class="vessel-icon" id="vessel-icon" aria-hidden="true"></div><div class="vessel-name" id="vessel-name">Stainless steel</div></div>
+              <p id="vessel-note">A neutral vessel protects freshness and color.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="process-section" aria-labelledby="process-title">
-      <div class="process-intro"><h2 id="process-title">From blue agave to the selected class.</h2><p>The production path is shared until maturation. Select a tequila above to see how the final stage changes.</p></div>
-      <ol class="process">
-        <li><div class="process-visual"><img src="assets/process/grow.jpg" alt="Rows of blue agave growing beneath the Jalisco highlands" width="720" height="720" loading="lazy"></div><div class="process-copy"><h3>Grow</h3><p>Agave tequilana Weber blue variety grows in an authorized Denomination of Origin region.</p></div></li>
-        <li><div class="process-visual"><img src="assets/process/harvest.jpg" alt="Jimador cutting agave leaves with a coa to reveal the piña" width="720" height="720" loading="lazy"></div><div class="process-copy"><h3>Harvest</h3><p>At the right stage of development, jimadores cut away the leaves and harvest the agave heart, or piña.</p></div></li>
-        <li><div class="process-visual"><img src="assets/process/cook.jpg" alt="Halved agave piñas steaming inside a brick oven" width="720" height="720" loading="lazy"></div><div class="process-copy"><h3>Cook</h3><p>Hydrolysis or cooking converts agave inulin into fermentable sugars.</p></div></li>
-        <li><div class="process-visual"><img src="assets/process/extract.jpg" alt="Cooked agave fibers passing through a roller mill as juice is collected" width="720" height="720" loading="lazy"></div><div class="process-copy"><h3>Extract</h3><p>Shredders or roller mills separate the sugars in the cooked piña from its fiber.</p></div></li>
-        <li><div class="process-visual"><img src="assets/process/ferment.jpg" alt="Agave must bubbling inside an open fermentation tank" width="720" height="720" loading="lazy"></div><div class="process-copy"><h3>Ferment</h3><p>Yeast transforms sugars in the must into alcohol and creates compounds that shape aroma and flavor.</p></div></li>
-        <li><div class="process-visual"><img src="assets/process/distill.jpg" alt="Copper pot stills boiling and condensing fermented agave must" width="720" height="720" loading="lazy"></div><div class="process-copy"><h3>Distill</h3><p>The fermented must is boiled and condensed, generally in two phases. Blanco emerges after this stage.</p></div></li>
-        <li class="maturation"><div class="process-visual"><img src="assets/process/mature.jpg" alt="Oak barrels resting in a shadowed maturation cellar" width="720" height="720" loading="lazy"></div><div class="process-copy"><h3>Mature or blend</h3><p id="maturation-copy">No wood maturation is required. After distillation, blanco is adjusted to bottling strength with water.</p></div></li>
-        <li><div class="process-visual"><img src="assets/process/bottle.jpg" alt="Clear tequila bottles being filled and capped on a bottling line" width="720" height="720" loading="lazy"></div><div class="process-copy"><h3>Bottle</h3><p>The finished class is filtered, bottled, labeled, and assigned to a production lot.</p></div></li>
-      </ol>
-      <div class="age-scale" aria-label="Selected class on a maturation timeline"><span class="current">No minimum</span><span>2 months</span><span>1 year</span><span>3 years</span></div>
-    </section>
-
-    <section class="label-guide" aria-labelledby="label-title">
-      <h2 id="label-title">Category is not class.</h2>
-      <div>
-        <p>Blanco, Joven, Reposado, Añejo, and Extra añejo are <strong>classes</strong>: they describe what happens after distillation. The category tells you where the fermentable sugars came from.</p>
-        <div class="label-options">
-          <article class="label-option"><h3>Tequila 100% Agave</h3><p>All sugars come from Agave tequilana Weber blue variety, and the tequila is bottled at origin.</p></article>
-          <article class="label-option"><h3>Tequila</h3><p>At least 51% of sugars come from blue agave; up to 49% may come from other permitted reducing sugars.</p></article>
+    <section class="zone premium-zone" aria-labelledby="sensory-title">
+      <div class="page-shell premium-content">
+        <div class="zone-head"><h2 id="sensory-title">Sensory profile</h2><p>Read the shape first, then the scores. These editorial tendencies describe style—not objective quality—and individual producers vary.</p></div>
+        <div class="sensory-grid">
+          <article class="radar-card">
+            <div class="radar-wrap">
+              <svg id="radar" viewBox="0 0 440 440" role="img" aria-labelledby="radar-title radar-desc">
+                <title id="radar-title">Blanco sensory radar</title>
+                <desc id="radar-desc">Five-axis radar chart for agave, oak, vanilla, caramel, and pepper.</desc>
+                <g id="radar-grid"></g><g id="radar-axes"></g><polygon class="radar-shape" id="radar-shape" points=""></polygon><g id="radar-dots"></g><g id="radar-labels"></g>
+              </svg>
+            </div>
+            <div class="px-7 pb-7"><h3 class="card-title">Signature notes</h3><div class="mt-4 flex flex-wrap gap-2" id="metric-chips"></div></div>
+          </article>
+          <article class="matrix-card">
+            <h3 class="card-title">Intensity matrix</h3>
+            <p class="card-note">Relative prominence on a 1–10 editorial scale. Zero means absent from the typical style profile.</p>
+            <div class="matrix-list" id="matrix-list"></div>
+            <p class="signature-note" id="signature-note">High agave and pepper; no oak overlay.</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="industry-report" aria-labelledby="industry-title">
-      <div class="industry-head">
-        <h2 id="industry-title">The wider tequila report.</h2>
-        <p>Official CRT figures for the full 2024 industry. These totals combine all classes and are shown as market context—not as a claim about one tab.</p>
+    <section class="zone" aria-labelledby="service-title">
+      <div class="page-shell">
+        <div class="zone-head"><h2 id="service-title">At the table</h2><p>The right glass directs aroma; the right food controls contrast. Adjust the recipe yield without leaving the guide.</p></div>
+        <div class="service-grid">
+          <article class="service-card glass-card">
+            <h3 class="card-title" id="glass-name">Riedel Tequila Glass</h3>
+            <p class="card-note">Recommended starting glassware</p>
+            <div class="glass-stage" id="glass-stage" aria-hidden="true"></div>
+            <div class="dimension-list" id="glass-dimensions"></div>
+          </article>
+
+          <article class="service-card pairing-card">
+            <h3 class="card-title">Regional pairings</h3>
+            <p class="card-note">Two ways to make the style speak more clearly.</p>
+            <div class="pairing-viewport"><div class="pairing-track" id="pairing-track"></div></div>
+            <div class="carousel-controls">
+              <button type="button" id="pairing-prev" aria-label="Previous pairing">←</button>
+              <span class="carousel-status" id="pairing-status" aria-live="polite">1 / 2</span>
+              <button type="button" id="pairing-next" aria-label="Next pairing">→</button>
+            </div>
+          </article>
+
+          <article class="service-card recipe-card">
+            <div class="recipe-title"><div><h3 class="card-title" id="recipe-name">Margarita</h3><p class="card-note">Scaled to your table</p></div><span class="yield-chip" id="yield-chip">1 serve</span></div>
+            <ul class="ingredients" id="ingredients"></ul>
+            <div class="yield-control">
+              <div class="yield-label-row"><label for="servings">Serving multiplier</label><output id="servings-output" for="servings">1</output></div>
+              <input id="servings" type="range" min="1" max="12" step="1" value="1">
+            </div>
+            <p class="method" id="recipe-method">Shake with ice, strain into a chilled glass, and finish with a lime half-wheel.</p>
+          </article>
+        </div>
       </div>
-      <div class="industry-stats">
-        <div class="industry-stat"><strong>495.8M L</strong><span>Tequila produced</span></div>
-        <div class="industry-stat"><strong>400.3M L</strong><span>Tequila exported</span></div>
-        <div class="industry-stat"><strong>1.8M t</strong><span>Agave used</span></div>
-        <div class="industry-stat"><strong>206</strong><span>Authorized producers</span></div>
-        <div class="industry-stat"><strong>2,991</strong><span>Brands linked to an authorized producer</span></div>
-        <div class="industry-stat"><strong>42,441</strong><span>Agave producers</span></div>
+    </section>
+
+    <section class="premium-zone" aria-labelledby="selection-title">
+      <div class="page-shell premium-content">
+        <div class="zone-head"><h2 id="selection-title">Bottle selection</h2><p>Three reference points for tasting the active style. Price tiers indicate relative market position, not a live quote.</p></div>
+        <div class="selection-grid" id="selection-grid"></div>
+        <p class="selection-disclaimer">Independent editorial guidance; no affiliate links. Availability and pricing vary by market. Verify the exact expression, NOM, alcohol strength, and local price before purchasing.</p>
       </div>
-      <a class="industry-source" href="https://www.crt.org.mx/en/2025/03/05/coordinated-work-will-continue-to-strengthen-the-tequila-agroindustry/" rel="noreferrer">Source: Consejo Regulador del Tequila, 2024 year-end report</a>
     </section>
   </main>
 
   <footer>
-    <p>Production and legal-class details follow Mexico’s Official Tequila Standard and the Consejo Regulador del Tequila. Sensory bars and class-to-cocktail pairings are editorial guides, not legal definitions; producer, process, and barrel choices vary.</p>
-    <span><a href="https://www.crt.org.mx/en/our-tequila/" rel="noreferrer">Production: CRT</a> · <a href="https://iba-world.com/iba-cocktail/margarita/" rel="noreferrer">Margarita: IBA</a> · <a href="https://iba-world.com/iba-cocktail/paloma/" rel="noreferrer">Paloma: IBA</a> · <a href="https://iba-world.com/iba-cocktail/tequila-sunrise/" rel="noreferrer">Sunrise: IBA</a></span>
+    <div class="page-shell footer-inner">
+      <p>Cristalino is a filtered aged-tequila style, not one of the five legal classes named by Mexico’s tequila standard. Flavor charts, pairings, and reviews are editorial; production choices create substantial variation. Enjoy responsibly and only if you are of legal drinking age.</p>
+      <div class="footer-links">
+        <a href="https://www.crt.org.mx/en/our-tequila/" rel="noreferrer">Class definitions</a>
+        <a href="https://www.tequilaochomexico.com/en/tequilas/" rel="noreferrer">Tequila Ocho profiles</a>
+        <a href="https://www.donjulio.com/en/our-tequilas/don-julio-70-cristalino-tequila" rel="noreferrer">Cristalino reference</a>
+      </div>
+    </div>
   </footer>
 
   <script>
-    const tabs = [...document.querySelectorAll('[role="tab"]')];
-    const panels = [...document.querySelectorAll('[role="tabpanel"]')];
-    const maturationCopy = document.querySelector('#maturation-copy');
-    const scalePoints = [...document.querySelectorAll('.age-scale span')];
-    const statAge = document.querySelector('#stat-age');
-    const statWood = document.querySelector('#stat-wood');
-    const statServe = document.querySelector('#stat-serve');
-    const cocktailClass = document.querySelector('#cocktail-class');
-    const cocktailList = document.querySelector('#cocktail-list');
-    const differenceCopy = document.querySelector('#difference-copy');
-
-    const classReports = {
+    const styles = {
       blanco: {
-        name: 'Blanco', age: 'No minimum', wood: 'None required', serve: 'Neat, chilled, or in bright highballs',
-        taste: { agave: 5, oak: 0, fruit: 3, spice: 4, body: 2 },
-        cocktails: [
-          ['Margarita', 'Lime and orange liqueur frame the fresh agave and pepper without hiding it.'],
-          ['Paloma', 'Grapefruit, lime, salt, and bubbles sharpen a lively blanco profile.'],
-          ['Ranch Water', 'Mineral water and lime keep the spirit itself at the center.']
-        ],
-        difference: 'Blanco is the only class defined as direct from the still with no required wood maturation. Unlike Joven, it is not a blend with an aged class; unlike Reposado, Añejo, and Extra añejo, wood contact does not define it.'
-      },
-      joven: {
-        name: 'Joven', age: 'No class minimum', wood: 'Varies with the blend', serve: 'Long drinks and fruit-led cocktails',
-        taste: { agave: 3, oak: 2, fruit: 3, spice: 2, body: 3 },
-        cocktails: [
-          ['Tequila Sunrise', 'Orange and grenadine suit a soft, approachable blended profile.'],
-          ['Batanga', 'Cola, lime, and salt work with Joven’s mix of fresh and rounded notes.'],
-          ['Mexican Mule', 'Ginger and lime give the blended character a crisp, spicy frame.']
-        ],
-        difference: 'Joven is defined by composition rather than a minimum time in barrel: blanco is blended with Reposado, Añejo, or Extra añejo. It can resemble a lightly rested tequila, but it is not interchangeable with Reposado, which must spend at least two months in wood.'
+        name: "Blanco", index: "Class 01 / 05", badge: "Direct from the still",
+        deck: "The most transparent reading of cooked agave, fermentation, and distillation choices: bright, direct, and structurally lean.",
+        aging: "0–60 days", counter: 60, unit: "days", vessel: "Stainless steel", vesselType: "tank", vesselNote: "A neutral vessel protects freshness and color.",
+        theme: { paper: "#F7FAF8", surface: "#FFFFFF", surface2: "#E8F3ED", ink: "#102428", accent: "#00A86B", accentText: "#00784C", rgb: "0 168 107", accentInk: "#052F20", themeColor: "#F7FAF8" },
+        swatches: [["#00A86B", "Agave green anchors the unaged profile; high-lightness surfaces preserve the sense of clarity."],["#E8F3ED", "A mineral green tint suggests cool stainless steel and freshly cut agave."],["#FFFFFF", "Near-white keeps visual weight away from oak and on the raw material."]],
+        metrics: [["Agave",10],["Oak",0],["Citrus",8],["Pepper",9]],
+        matrix: { Agave:10, Oak:0, Vanilla:1, Caramel:1, Pepper:9 }, signature: "High agave and pepper; no oak overlay.",
+        glass: { name:"Riedel Tequila Glass", shape:"flute", dimensions:[["Height","210 mm"],["Bowl","Narrow tulip"],["Pour","30–45 ml"]] },
+        pairings: [{name:"Ceviche", art:"ceviche", note:"Acid and salinity mirror citrus notes while cooling pepper."},{name:"Fish tacos", art:"tacos", note:"Fried texture rounds the spirit; cabbage and lime keep it vivid."}],
+        cocktail: { name:"Margarita", ingredients:[[2,"oz","Blanco tequila"],[1,"oz","Fresh lime juice"],[.75,"oz","Orange liqueur"],[.25,"oz","Agave syrup"]], method:"Shake with ice, strain into a chilled glass, and finish with a lime half-wheel." },
+        brands: [{name:"Tequila Ocho Plata", tier:"$$", note:"Single-estate agave focus; batches foreground terroir and cooked-agave detail.", review:"Choose it when you want the field to remain audible after distillation."},{name:"LALO Blanco", tier:"$$", note:"A deliberately narrow blanco proposition with a clean, direct profile.", review:"A useful calibration pour for bright, uncluttered agave character."},{name:"Fortaleza Blanco", tier:"$$", note:"Traditionally styled and textural, with an earthier sensory register.", review:"The contrast pick: more tactile and rustic than the modern-clean archetype."}]
       },
       reposado: {
-        name: 'Reposado', age: 'At least 2 months', wood: 'Oak or holm oak container', serve: 'Neat, on ice, or in agave-forward sours',
-        taste: { agave: 4, oak: 3, fruit: 3, spice: 3, body: 3 },
-        cocktails: [
-          ["Tommy’s Margarita", 'Agave nectar and lime echo the spirit while short wood rest adds roundness.'],
-          ['Reposado Paloma', 'Grapefruit stays bright while the rested tequila adds a softer middle.'],
-          ['El Diablo', 'Berry, lime, and ginger meet the vanilla-and-spice side of Reposado.']
-        ],
-        difference: 'Reposado is the first class with a legal minimum period in wood: two months. It carries more oak color and flavor than Blanco, yet usually keeps more direct agave character than Añejo, which must mature for at least one year.'
+        name: "Reposado", index: "Class 02 / 05", badge: "Rested in wood", deck: "The hinge between field and barrel. Short maturation rounds the edges with honeyed warmth while cooked agave still leads.", aging: "2 months–1 year", counter: 2, unit: "months", vessel: "American / French oak", vesselType: "barrel", vesselNote: "Wood introduces tannin, color, vanilla, and baking-spice cues.",
+        theme: { paper: "#FBF4E5", surface: "#FFF9EC", surface2: "#F3DFC0", ink: "#342512", accent: "#FFBF00", accentText: "#755300", rgb: "255 191 0", accentInk: "#352500", themeColor: "#FBF4E5" },
+        swatches: [["#FFBF00","Amber is the visual midpoint: luminous enough for agave, warm enough for oak."],["#F3DFC0","Cream lowers contrast and makes the spirit read softer and rounder."],["#9D5A20","A restrained brown note signals toast without tipping into long-aged weight."]],
+        metrics: [["Agave",7],["Oak",5],["Caramel",6],["Vanilla",6]], matrix: { Agave:7, Oak:5, Vanilla:6, Caramel:6, Pepper:4 }, signature: "Agave remains legible beneath a honeyed oak layer.",
+        glass: { name:"Glencairn Glass", shape:"glencairn", dimensions:[["Height","115 mm"],["Bowl","Wide base / taper"],["Pour","30–45 ml"]] }, pairings: [{name:"Pork carnitas",art:"carnitas",note:"Rich pork catches caramel notes; salsa restores acidity and lift."},{name:"Grilled corn",art:"corn",note:"Char meets barrel toast while sweet kernels amplify vanilla."}],
+        cocktail: { name:"Tequila Old Fashioned", ingredients:[[2,"oz","Reposado tequila"],[.25,"oz","Agave nectar"],[2,"dash","Orange bitters"]], method:"Stir with ice until chilled, strain over a large cube, and express orange peel." },
+        brands: [{name:"Tequila Ocho Reposado",tier:"$$",note:"Brief American-oak rest designed to protect estate-specific agave.",review:"For drinkers who want the barrel as punctuation, not the sentence."},{name:"El Tesoro Reposado",tier:"$$",note:"A traditional-style reference with roasted-agave depth and measured wood.",review:"Structured enough to sip, assertive enough for a spirit-led cocktail."},{name:"Don Julio Reposado",tier:"$$",note:"A polished, accessible profile with a rounded amber register.",review:"The familiar benchmark in this trio: composed, smooth, and easy to place."}]
       },
       anejo: {
-        name: 'Añejo', age: 'At least 1 year', wood: 'Oak or holm oak, ≤600 L', serve: 'Neat or in short stirred cocktails',
-        taste: { agave: 3, oak: 5, fruit: 4, spice: 4, body: 4 },
-        cocktails: [
-          ['Añejo Old Fashioned', 'Bitters and a little sweetener support the barrel notes without crowding them.'],
-          ['Añejo Sour', 'Citrus lifts the dense oak and dried-fruit character.'],
-          ['Manhattan-style', 'Sweet vermouth and bitters match the weight of a year-plus spirit.']
-        ],
-        difference: 'Añejo requires at least one year in oak or holm oak barrels no larger than 600 liters. That is substantially longer and more tightly vessel-defined than Reposado, but shorter than Extra añejo’s three-year minimum.'
+        name: "Añejo", index: "Class 03 / 05", badge: "One to three years", deck: "A mature conversation between agave and oak: deeper color, fuller texture, and a long register of vanilla, cocoa, and toast.", aging: "1–3 years", counter: 1, unit: "year", vessel: "Oak barrels (max 600 L)", vesselType: "barrel", vesselNote: "Smaller legal vessel capacity intensifies contact between spirit and wood.",
+        theme: { paper: "#F4E6D6", surface: "#FAEEDF", surface2: "#DDC0A0", ink: "#30170C", accent: "#B87333", accentText: "#7A3C13", rgb: "184 115 51", accentInk: "#210E05", themeColor: "#F4E6D6" },
+        swatches: [["#B87333","Copper carries the visual logic of oxidation, toast, and longer oak contact."],["#DDC0A0","A dry parchment tint keeps the interface warm without becoming sweet."],["#6B2D16","A mahogany shadow adds perceived density and a cocoa-like finish."]],
+        metrics: [["Agave",3],["Oak",9],["Vanilla",9],["Chocolate",8]], matrix: { Agave:3, Oak:9, Vanilla:9, Caramel:8, Pepper:3 }, signature: "Oak, vanilla, and cocoa over a quieter agave core.",
+        glass: { name:"Spirits Snifter", shape:"snifter", dimensions:[["Height","135 mm"],["Bowl","Round / inward lip"],["Pour","25–35 ml"]] }, pairings: [{name:"Ribeye steak",art:"steak",note:"Fat and char meet barrel tannin, cocoa, and roasted depth."},{name:"Dark chocolate mole",art:"mole",note:"Bittersweet cacao echoes oak while chile lifts the finish."}],
+        cocktail: { name:"Oaxaca Old Fashioned", ingredients:[[1.5,"oz","Añejo tequila"],[.5,"oz","Mezcal"],[.25,"oz","Agave nectar"],[2,"dash","Aromatic bitters"]], method:"Stir with ice, strain over a large cube, and flame or express an orange peel." },
+        brands: [{name:"Tequila Ocho Añejo",tier:"$$",note:"One year in seasoned American oak, built to retain cooked-agave identity.",review:"Añejo for the terroir-minded: wood supports rather than masks."},{name:"Don Julio Añejo",tier:"$$",note:"An eighteen-month American-white-oak profile with a polished finish.",review:"Balanced and recognizable, with enough oak to teach the class."},{name:"El Tesoro Añejo",tier:"$$",note:"A robust traditional-style pour with layered roast and barrel spice.",review:"Select it for texture and a longer, more savory finish."}]
       },
       extra: {
-        name: 'Extra añejo', age: 'At least 3 years', wood: 'Oak or holm oak, ≤600 L', serve: 'Small neat pour; minimal dilution',
-        taste: { agave: 2, oak: 5, fruit: 4, spice: 4, body: 5 },
-        cocktails: [
-          ['Neat with water aside', 'Not technically a cocktail, but the clearest way to examine a long-matured bottle.'],
-          ['Agave Old Fashioned', 'Use restrained sugar and bitters so three-plus years of maturation remain legible.'],
-          ['Sazerac-style', 'A rinse, bitters, and minimal sweetening suit a concentrated barrel profile.']
-        ],
-        difference: 'Extra añejo has the longest legal minimum: three years in oak or holm oak barrels no larger than 600 liters. It shares the vessel limit with Añejo but spends at least two additional years in maturation, so oak influence is commonly strongest here.'
+        name: "Extra Añejo", index: "Class 04 / 05", badge: "Three years minimum", deck: "The slowest register: concentrated wood influence, rancio-like complexity, and a contemplative texture closer to mature brown spirits.", aging: "3+ years minimum", counter: 3, unit: "years", vessel: "Charred oak barrels", vesselType: "barrel", vesselNote: "Extended extraction emphasizes toast, leather, dried fruit, and tannin.",
+        theme: { paper: "#1A1A1A", surface: "#231B17", surface2: "#38231C", ink: "#F5E6C5", accent: "#D5AD57", accentText: "#E2C473", rgb: "213 173 87", accentInk: "#1A1206", themeColor: "#1A1A1A" },
+        swatches: [["#D5AD57","Muted gold reads as luxury through restraint rather than brightness."],["#38231C","Mahogany carries the visual weight of long barrel extraction."],["#1A1A1A","Charcoal removes distraction and makes the liquid appear illuminated."]],
+        metrics: [["Agave",1],["Oak",10],["Leather",9],["Tobacco",8]], matrix: { Agave:1, Oak:10, Vanilla:8, Caramel:9, Pepper:2 }, signature: "Maximum oak weight, with leather and tobacco complexity.",
+        glass: { name:"Wide-Bowl Snifter", shape:"wide", dimensions:[["Height","128 mm"],["Bowl","Wide / low shoulder"],["Pour","20–30 ml"]] }, pairings: [{name:"Aged Gouda",art:"gouda",note:"Crystalline salt and nutty sweetness mirror long maturation."},{name:"Crème brûlée",art:"brulee",note:"Burnt sugar and custard align with caramelized oak and vanilla."}],
+        cocktail: { name:"Strictly Neat", ingredients:[[2,"oz","Extra Añejo tequila"],[2,"drop","Water, optional"]], method:"Pour at room temperature. Rest for two minutes; add only a few drops of water if the alcohol masks aroma." },
+        brands: [{name:"Tequila Ocho Extra Añejo",tier:"$$$",note:"Three-year American-oak maturation with a harvest-specific point of view.",review:"A long-aged pour that still asks where the agave was grown."},{name:"Tapatío Excelencia",tier:"$$$",note:"An established extra-añejo reference known for mature depth and concentration.",review:"Choose it for a darker, denser study of extended oak contact."},{name:"Tears of Llorona",tier:"$$$",note:"A multi-cask luxury expression with broad aromatic ambition.",review:"The maximalist pick: layered, expansive, and built for a slow glass."}]
+      },
+      cristalino: {
+        name: "Cristalino", index: "Filtered style 05 / 05", badge: "Not a legal class", deck: "An aged tequila filtered back toward clarity. The visual paradox is the point: mature vanilla and oak cues in an almost colorless liquid.", aging: "Variable (Añejo base)", counter: 0, unit: "variable", vessel: "Oak + charcoal filtration", vesselType: "filter", vesselNote: "Maturation develops flavor; filtration removes much of the color and can reshape aroma.",
+        theme: { paper: "#050505", surface: "#0D0F10", surface2: "#171A1C", ink: "#F8FAFA", accent: "#F5FFFF", accentText: "#F5FFFF", rgb: "245 255 255", accentInk: "#050505", themeColor: "#050505" },
+        swatches: [["#F5FFFF","Near-white against obsidian makes clarity feel active rather than empty."],["#A7E7EA","A cool cyan edge suggests filtered brilliance and polished glass."],["#171A1C","Obsidian contrast preserves the memory of an aged base beneath clarity."]],
+        metrics: [["Agave",5],["Oak",6],["Vanilla",8],["Clarity",10]], matrix: { Agave:5, Oak:6, Vanilla:8, Caramel:4, Pepper:2 }, signature: "Vanilla and polished oak in a visually clear presentation.",
+        glass: { name:"Coupe Glass", shape:"coupe", dimensions:[["Height","155 mm"],["Bowl","Broad / shallow"],["Pour","75–100 ml"]] }, pairings: [{name:"Oysters",art:"oysters",note:"Cold salinity sharpens the clear, polished finish."},{name:"Fresh sushi",art:"sushi",note:"Clean rice, seaweed, and delicate fish keep vanilla from feeling heavy."}],
+        cocktail: { name:"Crystal Clear Negroni", ingredients:[[1,"oz","Cristalino tequila"],[1,"oz","Bianco vermouth"],[1,"oz","Clear bitter aperitivo"]], method:"Stir with ice and strain over a large clear cube. Express grapefruit peel." },
+        brands: [{name:"Don Julio 70 Cristalino",tier:"$$$",note:"An eighteen-month añejo base filtered with charcoal for clarity.",review:"The category-defining reference and the most useful first calibration."},{name:"Maestro Dobel Diamante",tier:"$$",note:"A blended aged-tequila approach built around a clear, smooth profile.",review:"A softer bridge between aged flavors and modern visual minimalism."},{name:"Herradura Ultra",tier:"$$",note:"A cristalino positioned around a polished, sweet-leaning luxury register.",review:"The roundest option here; useful for understanding the style’s accessible side."}]
       }
     };
 
-    function updateReport(key) {
-      const report = classReports[key];
-      statAge.textContent = report.age;
-      statWood.textContent = report.wood;
-      statServe.textContent = report.serve;
-      cocktailClass.textContent = report.name;
-      differenceCopy.textContent = report.difference;
-      Object.entries(report.taste).forEach(([name, value]) => {
-        document.querySelector(`[data-taste="${name}"]`).style.width = `${value * 20}%`;
-        document.querySelector(`[data-value="${name}"]`).textContent = `${value}/5`;
-      });
-      cocktailList.innerHTML = report.cocktails.map(([name, note]) => `<li><strong>${name}</strong><p>${note}</p></li>`).join('');
-    }
+    const coreAxes = ["Agave", "Oak", "Vanilla", "Caramel", "Pepper"];
+    const tabs = [...document.querySelectorAll("[role=tab]")];
+    const root = document.documentElement;
+    const body = document.body;
+    const $ = (selector) => document.querySelector(selector);
+    let activeKey = "blanco";
+    let pairingIndex = 0;
+    let servings = 1;
+    let ageAnimation = 0;
+    let recipeAnimation = 0;
 
-    function activateTab(tab, moveFocus = false) {
-      tabs.forEach(item => {
-        const active = item === tab;
-        item.setAttribute('aria-selected', String(active));
-        item.tabIndex = active ? 0 : -1;
-      });
-      panels.forEach(panel => { panel.hidden = panel.id !== tab.getAttribute('aria-controls'); });
-      const panel = document.getElementById(tab.getAttribute('aria-controls'));
-      document.documentElement.style.setProperty('--active', panel.dataset.accent);
-      document.documentElement.style.setProperty('--liquid', panel.dataset.liquid);
-      maturationCopy.textContent = panel.dataset.maturation;
-      scalePoints.forEach((point, index) => point.classList.toggle('current', index === Number(panel.dataset.age)));
-      updateReport(tab.id.replace('tab-', ''));
-      if (moveFocus) tab.focus();
-    }
+    const vesselIcons = {
+      tank: `<svg viewBox="0 0 80 80" fill="none" aria-hidden="true"><ellipse cx="40" cy="16" rx="24" ry="9" stroke="currentColor" stroke-width="2"/><path d="M16 16v43c0 5 11 9 24 9s24-4 24-9V16" stroke="currentColor" stroke-width="2"/><path d="M16 35c0 5 11 9 24 9s24-4 24-9M32 68v7m16-7v7" stroke="currentColor" stroke-width="2"/></svg>`,
+      barrel: `<svg viewBox="0 0 80 80" fill="none" aria-hidden="true"><path d="M22 10c-6 15-6 45 0 60m36-60c6 15 6 45 0 60M22 10c10-3 26-3 36 0m-36 60c10 3 26 3 36 0" stroke="currentColor" stroke-width="2"/><path d="M18 22h44M16 40h48M18 58h44M32 8c-3 18-3 46 0 64m16-64c3 18 3 46 0 64" stroke="currentColor" stroke-width="2"/></svg>`,
+      filter: `<svg viewBox="0 0 80 80" fill="none" aria-hidden="true"><path d="M12 13h56L48 40v23l-16 7V40L12 13Z" stroke="currentColor" stroke-width="2"/><path d="M22 21h36M27 29h26" stroke="currentColor" stroke-width="2"/><circle cx="40" cy="51" r="3" fill="currentColor"/></svg>`
+    };
+    const glassShapes = {
+      flute: `<svg viewBox="0 0 180 250"><path class="glass-outline" d="M52 18h76l-10 126c-2 25-54 25-56 0L52 18Z"/><path class="glass-liquid" d="M61 99h58l-3 44c-2 20-50 20-52 0Z"/><path d="M90 164v58M57 226h66" fill="none" stroke="currentColor" stroke-width="2"/></svg>`,
+      glencairn: `<svg viewBox="0 0 180 250"><path class="glass-outline" d="M55 22h70c-4 37-3 49 9 78 14 35-4 74-44 74s-58-39-44-74c12-29 13-41 9-78Z"/><path class="glass-liquid" d="M45 112h90c4 31-12 57-45 57s-49-26-45-57Z"/><path d="M90 174v40M54 222h72" fill="none" stroke="currentColor" stroke-width="2"/></svg>`,
+      snifter: `<svg viewBox="0 0 180 250"><path class="glass-outline" d="M60 26h60c-7 27-4 43 12 75 17 34-2 78-42 78s-59-44-42-78c16-32 19-48 12-75Z"/><path class="glass-liquid" d="M45 116h90c1 35-17 58-45 58s-46-23-45-58Z"/><path d="M90 179v37M55 224h70" fill="none" stroke="currentColor" stroke-width="2"/></svg>`,
+      wide: `<svg viewBox="0 0 180 250"><path class="glass-outline" d="M66 30h48c-5 26 2 39 24 72 23 35 1 81-48 81s-71-46-48-81c22-33 29-46 24-72Z"/><path class="glass-liquid" d="M39 119h102c2 37-19 59-51 59s-53-22-51-59Z"/><path d="M90 183v33M52 224h76" fill="none" stroke="currentColor" stroke-width="2"/></svg>`,
+      coupe: `<svg viewBox="0 0 180 250"><path class="glass-outline" d="M28 38h124c-7 43-27 72-62 72S35 81 28 38Z"/><path class="glass-liquid" d="M39 56h102c-10 31-27 48-51 48S49 87 39 56Z"/><path d="M90 110v105M48 224h84" fill="none" stroke="currentColor" stroke-width="2"/></svg>`
+    };
 
+    function applyTheme(theme) {
+      const values = {"--paper":theme.paper,"--surface":theme.surface,"--surface-2":theme.surface2,"--ink":theme.ink,"--accent":theme.accent,"--accent-text":theme.accentText,"--accent-rgb":theme.rgb,"--accent-ink":theme.accentInk,"--line":`rgb(${theme.rgb} / .24)`,"--glow":`rgb(${theme.rgb} / .28)`};
+      Object.entries(values).forEach(([property, value]) => root.style.setProperty(property, value));
+      document.querySelector('meta[name="theme-color"]').setAttribute("content", theme.themeColor);
+    }
+    function animateNumber(element, target, unit) {
+      cancelAnimationFrame(ageAnimation);
+      const start = performance.now(); const from = Number(element.textContent) || 0; const duration = 460;
+      const tick = (now) => { const p = Math.min(1, (now - start) / duration); const eased = 1 - Math.pow(1 - p, 3); element.textContent = Math.round(from + (target - from) * eased); if (p < 1) ageAnimation = requestAnimationFrame(tick); };
+      $("#age-unit").textContent = unit; ageAnimation = requestAnimationFrame(tick);
+    }
+    function renderSwatches(data) {
+      const wrap = $("#swatches");
+      wrap.innerHTML = data.map(([hex], index) => `<button class="swatch ${index === 0 ? "active" : ""}" type="button" style="--swatch:${hex}" aria-label="Inspect ${hex}" data-index="${index}"></button>`).join("");
+      const inspect = (index) => { wrap.querySelectorAll(".swatch").forEach((node, i) => node.classList.toggle("active", i === index)); $("#swatch-hex").textContent = data[index][0]; $("#swatch-science").textContent = data[index][1]; };
+      wrap.querySelectorAll(".swatch").forEach((button) => button.addEventListener("click", () => inspect(Number(button.dataset.index)))); inspect(0);
+    }
+    function pointFor(index, value, radius = 145) { const angle = -Math.PI / 2 + (index * Math.PI * 2 / coreAxes.length); const scaled = radius * value / 10; return [220 + Math.cos(angle) * scaled, 220 + Math.sin(angle) * scaled]; }
+    function renderRadar(matrix, name) {
+      $("#radar-grid").innerHTML = [2,4,6,8,10].map(level => `<polygon class="radar-grid" points="${coreAxes.map((_, i) => pointFor(i, level).join(",")).join(" ")}"></polygon>`).join("");
+      $("#radar-axes").innerHTML = coreAxes.map((_, i) => `<line class="radar-axis" x1="220" y1="220" x2="${pointFor(i,10)[0]}" y2="${pointFor(i,10)[1]}"></line>`).join("");
+      const points = coreAxes.map((axis, i) => pointFor(i, matrix[axis]));
+      $("#radar-shape").setAttribute("points", points.map(point => point.join(",")).join(" "));
+      $("#radar-dots").innerHTML = points.map(([cx,cy]) => `<circle class="radar-dot" cx="${cx}" cy="${cy}" r="5"></circle>`).join("");
+      $("#radar-labels").innerHTML = coreAxes.map((axis, i) => { const [x,y] = pointFor(i,11.6); const anchor = x < 190 ? "end" : x > 250 ? "start" : "middle"; return `<text class="radar-label" x="${x}" y="${y}" text-anchor="${anchor}" dominant-baseline="middle">${axis}</text>`; }).join("");
+      $("#radar-title").textContent = `${name} sensory radar`;
+    }
+    function renderMetrics(style) {
+      renderRadar(style.matrix, style.name);
+      $("#matrix-list").innerHTML = coreAxes.map(axis => `<div class="meter-row"><span>${axis}</span><div class="meter-track" role="meter" aria-label="${axis}" aria-valuemin="0" aria-valuemax="10" aria-valuenow="${style.matrix[axis]}"><div class="meter-fill" style="--meter-width:${style.matrix[axis] * 10}%"></div></div><span class="meter-value">${style.matrix[axis]}</span></div>`).join("");
+      $("#metric-chips").innerHTML = style.metrics.map(([label,value]) => `<span class="rounded-full border border-[var(--line)] px-3 py-1.5 text-[.67rem] font-semibold">${label} ${value}/10</span>`).join("");
+      $("#signature-note").textContent = style.signature;
+    }
+    function renderGlass(glass) { $("#glass-name").textContent = glass.name; $("#glass-stage").innerHTML = glassShapes[glass.shape]; $("#glass-dimensions").innerHTML = glass.dimensions.map(([label,value]) => `<div><span>${label}</span><strong>${value}</strong></div>`).join(""); }
+
+    function pairingArt(type, title) {
+      const art = {
+        ceviche:`<ellipse cx="160" cy="116" rx="105" ry="65"/><path d="M72 104c31 45 145 45 176 0l-18 74H90Z"/><circle cx="122" cy="108" r="18"/><circle cx="168" cy="92" r="17"/><circle cx="202" cy="116" r="15"/>`, tacos:`<path d="M58 162c3-67 54-100 102-100s99 33 102 100H58Z"/><path d="M83 143c20-20 43-29 77-29s57 9 77 29"/><circle cx="126" cy="121" r="9"/><circle cx="187" cy="127" r="8"/>`, carnitas:`<ellipse cx="160" cy="130" rx="110" ry="78"/><path d="M84 130c40-44 116-39 153 8-26 38-122 48-153-8Z"/><circle cx="119" cy="132" r="12"/><circle cx="170" cy="116" r="13"/><circle cx="206" cy="144" r="11"/>`, corn:`<path d="M119 41c58 32 76 123 27 182-54-31-73-125-27-182Z"/><path d="M111 211c-37-38-44-89-28-132 20 52 36 80 63 144"/><path d="M149 210c37-43 41-93 21-132-12 42-18 76-24 145"/>`, steak:`<path d="M75 177c-45-48-9-124 59-139 59-13 126 27 116 81-8 43-55 70-111 69-24-1-47-5-64-11Z"/><path d="M126 77c33-20 85-5 85 28s-50 51-84 31-33-40-1-59Z"/>`, mole:`<ellipse cx="160" cy="141" rx="113" ry="70"/><path d="M82 137c31-53 130-54 158 4-33 45-127 47-158-4Z"/><path d="M109 115c28 31 67 44 105 12"/>`, gouda:`<path d="M63 182 99 73l145-24 17 113-135 42Z"/><circle cx="139" cy="117" r="15"/><circle cx="201" cy="89" r="11"/><circle cx="202" cy="157" r="17"/>`, brulee:`<ellipse cx="160" cy="72" rx="92" ry="33"/><path d="M68 72v103c0 43 184 43 184 0V72"/><ellipse cx="160" cy="72" rx="92" ry="33"/><path d="M95 72c31-18 99-18 130 0"/>`, oysters:`<path d="M54 162c19-98 84-131 129-80 37-39 90 1 84 76-52 52-164 53-213 4Z"/><path d="M96 148c14-55 55-72 82-38 23-24 58 0 49 39-41 27-91 27-131-1Z"/>`, sushi:`<rect x="60" y="73" width="82" height="104" rx="16"/><rect x="176" y="73" width="82" height="104" rx="16"/><path d="M69 91h64M185 91h64"/><circle cx="101" cy="127" r="18"/><circle cx="217" cy="127" r="18"/>`
+      }[type];
+      return `<svg viewBox="0 0 320 240" role="img" aria-label="Stylized illustration of ${title}"><rect width="320" height="240" fill="var(--surface-2)"/><g fill="var(--accent)" opacity=".75">${art}</g><g fill="none" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${art}</g></svg>`;
+    }
+    function renderPairings(pairings) { pairingIndex = 0; $("#pairing-track").innerHTML = pairings.map(item => `<div class="pairing-slide"><div class="pairing-art">${pairingArt(item.art,item.name)}</div><h3>${item.name}</h3><p>${item.note}</p></div>`).join(""); updateCarousel(pairings.length); }
+    function updateCarousel(total = styles[activeKey].pairings.length) { $("#pairing-track").style.transform = `translateX(-${pairingIndex * 100}%)`; $("#pairing-status").textContent = `${pairingIndex + 1} / ${total}`; }
+    function formatAmount(value) { return Number.isInteger(value) ? String(value) : value.toFixed(2).replace(/0$/, ""); }
+    function animateIngredients(targetServings) {
+      cancelAnimationFrame(recipeAnimation); const nodes = [...document.querySelectorAll(".ingredient-amount")]; const from = servings; const start = performance.now();
+      const tick = (now) => { const p = Math.min(1, (now - start) / 180); const value = from + (targetServings - from) * p; nodes.forEach(node => { node.textContent = `${formatAmount(Number(node.dataset.base) * value)} ${node.dataset.unit}`; }); if (p < 1) recipeAnimation = requestAnimationFrame(tick); else servings = targetServings; };
+      recipeAnimation = requestAnimationFrame(tick); $("#yield-chip").textContent = `${targetServings} ${targetServings === 1 ? "serve" : "serves"}`; $("#servings-output").value = targetServings;
+    }
+    function renderRecipe(recipe) { servings = 1; $("#servings").value = 1; $("#servings-output").value = 1; $("#yield-chip").textContent = "1 serve"; $("#recipe-name").textContent = recipe.name; $("#recipe-method").textContent = recipe.method; $("#ingredients").innerHTML = recipe.ingredients.map(([amount,unit,name]) => `<li><span class="ingredient-amount" data-base="${amount}" data-unit="${unit}">${formatAmount(amount)} ${unit}</span><span>${name}</span></li>`).join(""); }
+    function renderBrands(brands) { $("#selection-grid").innerHTML = brands.map(brand => `<article class="brand-card"><span class="tier" aria-label="Relative price tier ${brand.tier.length} of 3">${brand.tier}</span><h3>${brand.name}</h3><p class="brand-note">${brand.note}</p><p class="review">“${brand.review}”</p></article>`).join(""); }
+    function setStyle(key, focus = false) {
+      const style = styles[key]; activeKey = key; body.dataset.theme = key; applyTheme(style.theme);
+      tabs.forEach(tab => { const selected = tab.dataset.key === key; tab.classList.toggle("active", selected); tab.setAttribute("aria-selected", selected); tab.tabIndex = selected ? 0 : -1; if (selected && focus) tab.focus(); });
+      $("#guide").setAttribute("aria-labelledby", `tab-${key}`); $("#class-index").textContent = style.index; $("#class-badge").textContent = style.badge; $("#class-title").textContent = style.name; $("#class-deck").textContent = style.deck; $("#bottle-type").textContent = style.name.toUpperCase(); $("#age-range").textContent = style.aging; animateNumber($("#age-number"), style.counter, style.unit); $("#vessel-name").textContent = style.vessel; $("#vessel-note").textContent = style.vesselNote; $("#vessel-icon").innerHTML = vesselIcons[style.vesselType];
+      renderSwatches(style.swatches); renderMetrics(style); renderGlass(style.glass); renderPairings(style.pairings); renderRecipe(style.cocktail); renderBrands(style.brands); $("#announce").textContent = `${style.name} guide loaded.`;
+    }
     tabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => activateTab(tab));
-      tab.addEventListener('keydown', event => {
-        let next = index;
-        if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
-        else if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
-        else if (event.key === 'Home') next = 0;
-        else if (event.key === 'End') next = tabs.length - 1;
-        else return;
-        event.preventDefault();
-        activateTab(tabs[next], true);
-      });
+      tab.addEventListener("click", () => setStyle(tab.dataset.key));
+      tab.addEventListener("keydown", (event) => { let next = index; if (event.key === "ArrowRight") next = (index + 1) % tabs.length; else if (event.key === "ArrowLeft") next = (index - 1 + tabs.length) % tabs.length; else if (event.key === "Home") next = 0; else if (event.key === "End") next = tabs.length - 1; else return; event.preventDefault(); setStyle(tabs[next].dataset.key, true); });
     });
-
-    activateTab(tabs[0]);
+    $("#quality-switch").addEventListener("click", () => { const isAgave = $("#quality-switch").getAttribute("aria-checked") === "true"; $("#quality-switch").setAttribute("aria-checked", String(!isAgave)); body.classList.toggle("quality-mixto", isAgave); $("#quality-label").textContent = isAgave ? "Mixto lens" : "100% Blue Agave"; $("#quality-tip").hidden = !isAgave; $("#announce").textContent = isAgave ? "Mixto lens enabled. Premium matrices are muted while the category explanation is shown." : "100% Blue Agave lens restored."; });
+    $("#pairing-prev").addEventListener("click", () => { const total = styles[activeKey].pairings.length; pairingIndex = (pairingIndex - 1 + total) % total; updateCarousel(total); });
+    $("#pairing-next").addEventListener("click", () => { const total = styles[activeKey].pairings.length; pairingIndex = (pairingIndex + 1) % total; updateCarousel(total); });
+    $("#servings").addEventListener("input", (event) => animateIngredients(Number(event.target.value)));
+    setStyle("blanco");
   </script>
 </body>
 </html>
