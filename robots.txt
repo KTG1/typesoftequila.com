@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+Sitemap: https://ktg1.github.io/typesoftequila.com/sitemap.xml

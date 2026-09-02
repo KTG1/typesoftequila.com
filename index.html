@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A concise field guide to the five official classes of tequila.">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <link rel="canonical" href="https://ktg1.github.io/typesoftequila.com/">
+  <title>Types of Tequila — A Field Guide</title>
+  <style>
+    :root {
+      --agave: #123f4a;
+      --agave-deep: #09282f;
+      --paper: #f4f0e6;
+      --ink: #17262a;
+      --copper: #b86c3e;
+      --line: #9cafaa;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+    a:focus-visible { outline: 3px solid var(--copper); outline-offset: 4px; }
+
+    .masthead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 24px 0;
+      border-bottom: 1px solid color-mix(in srgb, var(--ink) 28%, transparent);
+    }
+
+    .brand {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .masthead span { font-size: .8rem; letter-spacing: .04em; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: clamp(36px, 7vw, 110px);
+      align-items: center;
+      width: min(1180px, calc(100% - 40px));
+      min-height: 76vh;
+      margin: 0 auto;
+      padding: 64px 0 84px;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.5rem, 9vw, 8.5rem);
+      font-weight: 400;
+      letter-spacing: -.065em;
+      line-height: .84;
+    }
+
+    .intro {
+      max-width: 580px;
+      margin: 34px 0 0;
+      font-size: clamp(1rem, 1.4vw, 1.22rem);
+    }
+
+    .seal {
+      position: relative;
+      width: min(37vw, 430px);
+      aspect-ratio: 1;
+      margin: 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background:
+        repeating-conic-gradient(from 8deg, transparent 0 13deg, color-mix(in srgb, var(--paper) 65%, transparent) 13deg 16deg),
+        radial-gradient(circle, var(--copper) 0 8%, var(--agave) 8% 50%, var(--agave-deep) 50% 100%);
+      box-shadow: 0 28px 60px rgba(9, 40, 47, .18);
+    }
+
+    .seal::before,
+    .seal::after {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--paper);
+      text-align: center;
+    }
+
+    .seal::before {
+      content: "05";
+      top: 30%;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(5rem, 12vw, 9rem);
+      line-height: 1;
+    }
+
+    .seal::after {
+      content: "OFFICIAL CLASSES";
+      bottom: 25%;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+    }
+
+    .guide {
+      color: var(--paper);
+      background: var(--agave-deep);
+      padding: clamp(70px, 9vw, 130px) 20px;
+    }
+
+    .guide-inner { width: min(1180px, 100%); margin: 0 auto; }
+
+    h2 {
+      max-width: 720px;
+      margin: 0 0 50px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.3rem, 5vw, 5rem);
+      font-weight: 400;
+      letter-spacing: -.045em;
+      line-height: .98;
+    }
+
+    .type {
+      display: grid;
+      grid-template-columns: minmax(130px, .55fr) minmax(150px, .55fr) 1.2fr;
+      gap: 24px;
+      align-items: baseline;
+      padding: 25px 0 27px;
+      border-top: 1px solid color-mix(in srgb, var(--paper) 34%, transparent);
+    }
+
+    .type:last-child { border-bottom: 1px solid color-mix(in srgb, var(--paper) 34%, transparent); }
+    .type h3 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.8rem, 3vw, 3.2rem); font-weight: 400; }
+    .type .character { color: #d0a285; font-weight: 700; }
+    .type p { max-width: 540px; margin: 0; color: #d8e0dc; }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 32px;
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 38px 0 46px;
+      font-size: .82rem;
+    }
+
+    footer p { max-width: 640px; margin: 0; }
+
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .seal { width: min(78vw, 390px); }
+      .type { grid-template-columns: 1fr; gap: 4px; }
+      footer { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="#top">Types of Tequila</a>
+    <span>A field guide</span>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <h1 id="hero-title">Five expressions. One blue agave.</h1>
+        <p class="intro">Tequila is classified into five official styles after distillation. The distinction comes from what happens next: bottling, blending, resting, or aging.</p>
+      </div>
+      <div class="seal" aria-label="Five official classes of tequila"></div>
+    </section>
+
+    <section class="guide" aria-labelledby="guide-title">
+      <div class="guide-inner">
+        <h2 id="guide-title">Read the bottle before you pour.</h2>
+
+        <article class="type">
+          <h3>Blanco</h3>
+          <span class="character">Clear and direct</span>
+          <p>Fresh from the still, with its alcohol level adjusted using water. Also called plata or silver.</p>
+        </article>
+        <article class="type">
+          <h3>Joven</h3>
+          <span class="character">Blended</span>
+          <p>Blanco combined with reposado, añejo, or extra añejo tequila. Also called oro or gold.</p>
+        </article>
+        <article class="type">
+          <h3>Reposado</h3>
+          <span class="character">Rested</span>
+          <p>Rested for at least two months in barrels or large wooden vats.</p>
+        </article>
+        <article class="type">
+          <h3>Añejo</h3>
+          <span class="character">Aged</span>
+          <p>Matured for at least one year in oak barrels no larger than 600 liters.</p>
+        </article>
+        <article class="type">
+          <h3>Extra añejo</h3>
+          <span class="character">Long-aged</span>
+          <p>Matured for at least three years, the longest-aged official class.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>An independent educational field guide. Classification details follow Mexico’s official tequila standard and the Consejo Regulador del Tequila.</p>
+    <a href="https://www.crt.org.mx/en/our-tequila/" rel="noreferrer">Reference: CRT</a>
+  </footer>
+</body>
+</html>
